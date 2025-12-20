@@ -1,19 +1,11 @@
 /*
 How to start: node createUser.js email password
 */
-
-import { MongoClient, ServerApiVersion } from "mongodb";
-import dotenv from "dotenv";
 import bcrypt from "bcrypt";
+import { getDB } from "./index.js";
 
-dotenv.config();
-
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri);
-
-async function main(params) {
-  await client.connect();
-  const db = client.db("analytics");
+async function main() {
+  const db = await getDB();
   const users = db.collection("users");
 
   const [email, password] = process.argv.slice(2);
@@ -33,7 +25,11 @@ async function main(params) {
   });
 }
 
-main().catch((err) => {
-  console.log(`Error: ${err}`);
-});
-process.exit(1);
+main()
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((err) => {
+    process.exit(1);
+    console.log(`Error: ${err}`);
+  });
