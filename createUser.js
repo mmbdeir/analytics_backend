@@ -11,7 +11,7 @@ async function main() {
   const [email, password] = process.argv.slice(2);
 
   if (!email || !password) {
-    console.log("Usage: node createUser.js <email> <password>");
+    console.log("Use: node createUser.js <email> <password>");
     process.exit(1);
   }
 
