@@ -30,6 +30,6 @@ main()
     process.exit(0);
   })
   .catch((err) => {
+    console.log(`Error: ${err}`); // This doesnt print cuz it doesnt recieve the error i think
     process.exit(1);
-    console.log(`Error: ${err}`);
   });
