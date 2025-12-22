@@ -18,6 +18,7 @@ async function main() {
   const passwordHash = await bcrypt.hash(password, 10);
 
   await users.insertOne({
+    uuid: crypto.randomUUID(),
     email,
     passwordHash,
     createdAt: new Date(),
