@@ -1,11 +1,14 @@
 {
-  "name": "analytics-backend",
+  "name": "analytics-cli",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
+  },
+  "bin": {
+    "analytics-cli": "./index.js"
   },
   "keywords": [],
   "author": "",
