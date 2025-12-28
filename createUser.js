@@ -11,8 +11,7 @@ export async function createUser(db, email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
   await users.insertOne({
-    uuid: crypto.randomUUID(),
-    email,
+    _id: email,
     passwordHash,
     createdAt: new Date(),
     role: "user",
