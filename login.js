@@ -3,17 +3,22 @@ import bcrypt from "bcrypt";
 export async function login(db, email, password) {
   const users = db.collection("users");
   try {
-    const document = await users.findOne({
+    const userDocument = await users.findOne({
       _id: email,
     });
-    const passwordHash = document.passwordHash;
-    const compare = await bcrypt.compare(password, passwordHash);
-    console.log(compare);
-  } catch (e) {
-    // If passwordHash doesnt exist its because it cant find the email in the document, so make a catch statement to catch specifically that.
-    console.log(e);
-    if (e instanceof TypeError) {
-      console.log("Couldnt find email.");
+    if (!userDocument) {
+      console.log("Couldn't find email.");
+      return false;
     }
+    const compare = await bcrypt.compare(password, userDocument.passwordHash);
+    if (!compare) {
+      console.log("Make sure the email and password are correct.");
+      return false;
+    }
+    //Login logic
+    // console.log("Login successful");
+  } catch (e) {
+    console.log("Login failed due to error:", e);
+    return false;
   }
 }
