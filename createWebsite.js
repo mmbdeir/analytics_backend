@@ -4,8 +4,7 @@ export async function createWebsite(db, websiteName) {
   const websites = db.collection("websites");
 
   if (!websiteName) {
-    console.log("Use: analytics-cli create-website <website name>");
-    process.exit(1);
+    throw new Error("Use: analytics-cli create-website <website name>.");
   }
 
   await websites.insertOne({

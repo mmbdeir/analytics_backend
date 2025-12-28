@@ -4,8 +4,7 @@ export async function createUser(db, email, password) {
   const users = db.collection("users");
 
   if (!email || !password) {
-    console.log("Use: analytics-cli create-user <email> <password>");
-    process.exit(1);
+    throw new Error("Use: analytics-cli create-user <email> <password>.");
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
