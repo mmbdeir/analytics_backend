@@ -29,33 +29,36 @@ async function main() {
   if (command === "create-user")
     createUser(db, args[0], args[1])
       .then(() => {
+        console.log("User created.");
         process.exit(0);
       })
       .catch((err) => {
-        console.log(`Error: ${err}`);
+        console.log(`Error: ${err.message}`);
         process.exit(1);
       });
   else if (command === "create-website")
     createWebsite(db, args[0])
       .then(() => {
+        console.log("Website created.");
         process.exit(0);
       })
       .catch((err) => {
-        console.log(`Error: ${err}`);
+        console.log(`Error: ${err.message}`);
         process.exit(1);
       });
   // Test to see if It works if I put wrong argument count
   else if (command === "login")
     login(db, ...args)
       .then(() => {
+        console.log("Login successful.");
         process.exit(0);
       })
       .catch((err) => {
-        console.log(`Error: ${err}`);
+        console.log(`Error: ${err.message}`);
         process.exit(1);
       });
   else {
-    console.log("Type it correctly next time");
+    console.log("Type it correctly next time.");
   }
   return db;
 }
