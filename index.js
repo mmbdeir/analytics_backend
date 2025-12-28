@@ -7,6 +7,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 import dotenv from "dotenv";
 import { createUser } from "./createUser.js";
 import { createWebsite } from "./createWebsite.js";
+import { login } from "./login.js";
 
 dotenv.config();
 
@@ -43,8 +44,18 @@ async function main() {
         console.log(`Error: ${err}`);
         process.exit(1);
       });
+  // Test to see if It works if I put wrong argument count
+  else if (command === "login")
+    login(db, ...args)
+      .then(() => {
+        process.exit(0);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+        process.exit(1);
+      });
   else {
-    console.log("Type it correctly");
+    console.log("Type it correctly next time");
   }
   return db;
 }
