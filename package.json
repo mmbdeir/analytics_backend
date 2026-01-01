@@ -1,5 +1,5 @@
 {
-  "name": "analytics-cli",
+  "name": "analytics-backend",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
