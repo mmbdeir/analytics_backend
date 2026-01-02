@@ -19,10 +19,10 @@ export function createWebsiteRouter(db) {
       _id: "site_" + crypto.randomBytes(8).toString("hex"),
       name: websiteName,
       // add owner id from appdata to owners.
-      owners: [],
+      admin: [],
       createdAt: new Date(),
     });
-    res.json({ success: true });
+    res.json({ status: 200 });
   });
   return router;
 }
