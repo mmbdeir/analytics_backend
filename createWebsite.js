@@ -3,16 +3,10 @@ import express from "express";
 
 export function createWebsiteRouter(db) {
   const router = express.Router();
+  const websites = db.collection("websites");
 
   router.post("/:websiteName", async (req, res) => {
-    const websites = db.collection("websites");
     const websiteName = req.params.websiteName;
-
-    if (!websiteName) {
-      return res
-        .status(400)
-        .json({ error: "Use: analytics-cli create-website <website name>." });
-    }
 
     // This will throw an error automatically cuz mongodb handles that
     await websites.insertOne({
