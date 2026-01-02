@@ -1,5 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 import { createWebsiteRouter } from "./createWebsite.js";
+import { createUser } from "./createUser.js";
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
@@ -29,3 +30,4 @@ app.listen(port, () => {
 });
 
 app.use("/createWebsite", createWebsiteRouter(db));
+app.use("/createUsers", createUser(db));
