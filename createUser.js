@@ -9,6 +9,7 @@ export async function createUser(db, email, password) {
 
   const passwordHash = await bcrypt.hash(password, 10);
 
+  // This will throw an error automatically
   await users.insertOne({
     _id: email,
     passwordHash,
