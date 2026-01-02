@@ -1,23 +1,27 @@
 import bcrypt from "bcrypt";
 
-export async function login(db, email, password) {
+export async function login(db) {
+  const router = express.Router();
   const users = db.collection("users");
-  if (!email || !password) {
-    throw new Error("Use: analytics-cli create-user <email> <password>");
-  }
 
-  const userDocument = await users.findOne({ _id: email });
+  router.post("/:email/:password", async (req, res) => {
+    const email = req.params.email;
+    const password = req.params.password;
 
-  if (!userDocument) {
-    throw new Error("Couldn't find email.");
-  }
+    const userDocument = await users.findOne({ _id: email });
+    if (!userDocument) {
+      res.status(401).json({ error: "Invalid credentials" });
+    }
 
-  const match = await bcrypt.compare(password, userDocument.passwordHash);
+    const match = await bcrypt.compare(password, userDocument.passwordHash);
 
-  if (!match) {
-    throw new Error("Make sure the email and password are correct.");
-  }
+    if (!match) {
+      res.status(401).json({ error: "Invalid credentials" });
+    }
 
+    res.status(200).res({ success: "True" });
+  });
+  return router;
   //Login logic
   // console.log("Login successful");
 }
