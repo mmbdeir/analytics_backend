@@ -16,7 +16,7 @@ export function createWebsiteRouter(db) {
       admin: [],
       createdAt: new Date(),
     });
-    res.json({ status: 200 });
+    res.status(200).json({ success: "True" });
   });
   return router;
 }

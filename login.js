@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
+import express from "express";
 
-export async function login(db) {
+export function login(db) {
   const router = express.Router();
   const users = db.collection("users");
 
@@ -10,7 +11,7 @@ export async function login(db) {
 
     const userDocument = await users.findOne({ _id: email });
     if (!userDocument) {
-      res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "Invalid credentials" });
     }
 
     const match = await bcrypt.compare(password, userDocument.passwordHash);
@@ -19,7 +20,7 @@ export async function login(db) {
       res.status(401).json({ error: "Invalid credentials" });
     }
 
-    res.status(200).res({ success: "True" });
+    res.status(200).json({ success: "True" });
   });
   return router;
   //Login logic
