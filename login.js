@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import express from "express";
+import jwt from "jsonwebtoken";
 
 export function login(db) {
   const router = express.Router();
@@ -20,7 +21,12 @@ export function login(db) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    res.status(200).json({ success: "True" });
+    jwt.sign({ email }, process.env.SECRET, (err, token) => {
+      if (err) return res.json({ err });
+      res.send({ token });
+    });
+
+    res.status(200).json({ token });
   });
   return router;
   //Login logic
