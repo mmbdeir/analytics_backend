@@ -25,8 +25,6 @@ export function login(db) {
       if (err) return res.json({ err });
       res.send({ token });
     });
-
-    res.status(200).json({ token });
   });
   return router;
   //Login logic
