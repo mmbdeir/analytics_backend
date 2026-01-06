@@ -23,7 +23,7 @@ export function login(db) {
 
     jwt.sign({ email }, process.env.SECRET, (err, token) => {
       if (err) return res.json({ err });
-      res.send({ token });
+      res.json({ token });
     });
   });
   return router;
