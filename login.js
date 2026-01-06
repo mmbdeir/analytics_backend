@@ -17,7 +17,7 @@ export function login(db) {
     const match = await bcrypt.compare(password, userDocument.passwordHash);
 
     if (!match) {
-      res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "Invalid credentials" });
     }
 
     res.status(200).json({ success: "True" });
