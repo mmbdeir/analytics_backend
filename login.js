@@ -21,10 +21,8 @@ export function login(db) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    jwt.sign({ email }, process.env.SECRET, (err, token) => {
-      if (err) return res.json({ err });
-      res.json({ token });
-    });
+    const token = jwt.sign({ email }, process.env.SECRET);
+    res.status(200).json({ token });
   });
   return router;
   //Login logic
