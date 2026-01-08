@@ -25,6 +25,4 @@ export function login(db) {
     res.status(200).json({ token });
   });
   return router;
-  //Login logic
-  // console.log("Login successful");
 }

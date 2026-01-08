@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import express from "express";
-import auth from "./auth.js";
+import { auth } from "./auth.js";
 
 export function createWebsiteRouter(db) {
   const router = express.Router();
