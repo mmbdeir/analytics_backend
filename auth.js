@@ -19,7 +19,7 @@ export function auth(req, res, next) {
       console.log(err);
       return res.json({ error: "Invalid or expire token" });
     }
-    req.email = decoded;
+    req.user = decoded;
     next();
   });
 }
