@@ -8,7 +8,7 @@ export function createWebsiteRouter(db) {
 
   router.post("/:websiteName", auth, async (req, res) => {
     const websiteName = req.params.websiteName;
-    const creator = req.users.email;
+    const creator = req.user.email;
 
     // This will throw an error automatically cuz mongodb handles that
     await websites.insertOne({
