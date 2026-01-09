@@ -25,7 +25,7 @@ export function createUser(db) {
           .status(409)
           .json({ error: "User with email already exists." });
       }
-      return res.status(500).json({ error: err });
+      return res.status(500).json({ error: err.message });
     }
     //HANDLE DUPLICATE KEY ERROR
   });
