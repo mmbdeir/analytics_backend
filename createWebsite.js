@@ -13,7 +13,7 @@ export function createWebsiteRouter(db) {
     //Create site ID and add it to following object. Then return it in res.json()
 
     // This will throw an error automatically cuz mongodb handles that
-    const id = "site_" + crypto.randomBytes(8).toString("hex");
+    const id = crypto.randomBytes(10).toString("hex");
     try {
       await websites.insertOne({
         _id: id,
