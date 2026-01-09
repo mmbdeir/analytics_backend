@@ -10,15 +10,21 @@ export function createWebsiteRouter(db) {
     const websiteName = req.params.websiteName;
     const creator = req.user.email;
 
+    //Create site ID and add it to following object. Then return it in res.json()
+
     // This will throw an error automatically cuz mongodb handles that
-    await websites.insertOne({
-      _id: "site_" + crypto.randomBytes(8).toString("hex"),
-      name: websiteName,
-      // add owner id from appdata to owners.
-      admin: [creator],
-      createdAt: new Date(),
-    });
-    res.status(200).json({ success: "True" });
+    const id = "site_" + crypto.randomBytes(8).toString("hex");
+    try {
+      await websites.insertOne({
+        _id: id,
+        name: websiteName,
+        admin: [creator],
+        createdAt: new Date(),
+      });
+      res.status(200).json({ success: "True", id: id });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   });
   return router;
 }
