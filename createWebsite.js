@@ -23,6 +23,11 @@ export function createWebsiteRouter(db) {
       });
       res.status(200).json({ success: "True", id: id });
     } catch (err) {
+      if (err.code == 11000) {
+        return res
+          .status(409)
+          .json({ error: "Website name already in use. Use another one." });
+      }
       return res.status(500).json({ error: err.message });
     }
   });
