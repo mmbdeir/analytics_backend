@@ -1,22 +1,25 @@
 import express from "express";
 
-export function updateMetrics() {
+export function updateMetrics(db) {
   const router = express.Router();
   const websites = db.collection("websites");
 
-  router.post("/", async (req, res) => {
+  router.post("/:id", async (req, res) => {
     try {
-      const siteID = req.body.siteID;
-      const url = req.body.url;
+      const siteID = req.params.siteID;
 
       if (!siteID) return res.status(400).json({ error: "Missing siteID" });
 
-      const website = websites.findOne({ _id: siteID });
+      const extra = req.body;
 
-      if (!website)
-        return res.status(404).json({ error: "Website ID not found." });
-
-      //Update metrics bellow:
+      await websites.updateOne(
+        { _id: siteID },
+        {
+          $inc: { visits: 1 },
+          $set: { lastVisit: new Date() },
+        },
+        ...extra
+      );
 
       res.status(200).json({ success: "True" });
     } catch (err) {
