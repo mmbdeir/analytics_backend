@@ -2,6 +2,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 import { createWebsiteRouter } from "./createWebsite.js";
 import { createUser } from "./createUser.js";
 import { login } from "./login.js";
+import { updateMetrics } from "./updateMetrics.js";
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
@@ -23,7 +24,7 @@ await client.connect();
 let db = client.db("analytics");
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({ type: ["application/json", "text/plain"] }));
 app.use(cors());
 
 app.listen(port, () => {
@@ -33,3 +34,4 @@ app.listen(port, () => {
 app.use("/createWebsite", createWebsiteRouter(db));
 app.use("/createUser", createUser(db));
 app.use("/login", login(db));
+app.use("/updateMetrics", updateMetrics(db));
