@@ -18,7 +18,7 @@ export function updateMetrics(db) {
           $inc: { visits: 1 },
           $set: { lastVisit: new Date() },
         },
-        ...extra
+        ...extra,
       );
 
       res.status(200).json({ success: "True" });
@@ -26,4 +26,5 @@ export function updateMetrics(db) {
       return res.json({ error: err });
     }
   });
+  return router;
 }
