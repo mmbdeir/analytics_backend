@@ -1,4 +1,5 @@
 import express from "express";
+import { ObjectId } from "mongodb";
 
 export function updateMetrics(db) {
   const router = express.Router();
@@ -6,19 +7,18 @@ export function updateMetrics(db) {
 
   router.post("/:id", async (req, res) => {
     try {
-      const siteID = req.params.siteID;
+      const siteID = req.params.id;
 
       if (!siteID) return res.status(400).json({ error: "Missing siteID" });
 
       const extra = req.body;
 
       await websites.updateOne(
-        { _id: siteID },
+        { _id: new ObjectId(siteID) },
         {
           $inc: { visits: 1 },
-          $set: { lastVisit: new Date() },
+          $set: { lastVisit: new Date(), ...extra },
         },
-        ...extra,
       );
 
       res.status(200).json({ success: "True" });
