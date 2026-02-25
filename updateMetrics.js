@@ -9,16 +9,16 @@ export function updateMetrics(db) {
     try {
       const siteID = req.params.id;
 
-      if (!ObjectId.isValid(siteID)) {
-        return res.status(400).json({ error: siteID });
-      }
+      // if (!ObjectId.isValid(siteID)) {
+      //   return res.status(400).json({ error: siteID });
+      // }
 
       if (!siteID) return res.status(400).json({ error: "Missing siteID" });
 
       const extra = req.body;
 
       await websites.updateOne(
-        { _id: new ObjectId(siteID) },
+        { _id: siteID },
         {
           $inc: { visits: 1 },
           $set: { lastVisit: new Date(), ...extra },
