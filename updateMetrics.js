@@ -9,8 +9,8 @@ export function updateMetrics(db) {
     try {
       const siteID = req.params.id;
 
-      if ((siteID = null | !siteID)) {
-        return res.status(400).json({ error: "Invalid siteID" });
+      if (!ObjectId.isValid(siteID)) {
+        return res.status(400).json({ error: !ObjectId.isValid(siteID) });
       }
 
       if (!siteID) return res.status(400).json({ error: "Missing siteID" });
