@@ -8,7 +8,7 @@ export function createWebsiteRouter(db) {
 
   router.post("/:websiteName", auth, async (req, res) => {
     const websiteName = req.params.websiteName;
-    const creator = "yoooo";
+    const creator = req.user.email;
 
     //Create site ID and add it to following object. Then return it in res.json()
 
