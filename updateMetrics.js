@@ -10,7 +10,7 @@ export function updateMetrics(db) {
       const siteID = req.params.id;
 
       if (!ObjectId.isValid(siteID)) {
-        return res.status(400).json({ error: !ObjectId.isValid(siteID) });
+        return res.status(400).json({ error: siteID });
       }
 
       if (!siteID) return res.status(400).json({ error: "Missing siteID" });
