@@ -1,7 +1,7 @@
 import express from "express";
 import { ObjectId } from "mongodb";
 
-export function this_website(db) {
+export function thisWebsite(db) {
   const router = express.Router();
   const websites = db.collection("websites");
 

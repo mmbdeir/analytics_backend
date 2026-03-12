@@ -2,7 +2,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 import { createWebsiteRouter } from "./createWebsite.js";
 import { createUser } from "./createUser.js";
 import { login } from "./login.js";
-import { this_website } from "./updateMetrics.js";
+import { thisWebsite } from "./updateMetrics.js";
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
@@ -44,4 +44,4 @@ app.listen(port, () => {
 app.use("/createWebsite", createWebsiteRouter(db));
 app.use("/createUser", createUser(db));
 app.use("/login", login(db));
-app.use("/this_website", this_website(db));
+app.use("/this_website", thisWebsite(db));
