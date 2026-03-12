@@ -25,7 +25,17 @@ let db = client.db("analytics");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ type: ["application/json", "text/plain"] }));
-app.use(cors());
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (mobile apps, curl, sendBeacon etc.)
+      if (!origin) return callback(null, true);
+
+      callback(null, origin); // reflect requesting origin
+    },
+    credentials: true,
+  }),
+);
 
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
