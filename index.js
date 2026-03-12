@@ -44,4 +44,4 @@ app.listen(port, () => {
 app.use("/createWebsite", createWebsiteRouter(db));
 app.use("/createUser", createUser(db));
 app.use("/login", login(db));
-app.use("/this_website", updateMetrics(db));
+app.use("/this_website", this_website(db));

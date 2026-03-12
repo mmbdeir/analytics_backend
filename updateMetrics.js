@@ -1,7 +1,7 @@
 import express from "express";
 import { ObjectId } from "mongodb";
 
-export function updateMetrics(db) {
+export function this_website(db) {
   const router = express.Router();
   const websites = db.collection("websites");
 
